@@ -1,5 +1,5 @@
-import { Guid } from "guid-typescript";
 
 export class CriarAutorDto{
+    idLivro!: string;
     nome = "";
 }

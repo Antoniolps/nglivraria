@@ -28,14 +28,6 @@ export class LivroService {
     return this.http.post<Livro>(`${environment.apiUrl}/${this.url}`, livro);
   }
 
-  public createAutorLivro(idLivro : string , idAutor : string) : Observable<Livro>{
-    let autorLivroDto = new AutorLivroDto;
-    autorLivroDto.idLivro = idLivro!;
-    autorLivroDto.idAutor = idAutor!;
-
-    return this.http.post<Livro>(`${environment.apiUrl}/${this.url}/${"Autor"}`, autorLivroDto);
-  }
-
   public deleteLivro(livro: Livro) : Observable<Livro[]>{
     return this.http.delete<Livro[]>(`${environment.apiUrl}/${this.url}/${livro.id}`);
   }

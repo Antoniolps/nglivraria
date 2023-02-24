@@ -1,38 +1,43 @@
-<div *ngIf="livro && livro.autores">
-    <h2>{{livro.titulo}}</h2>
-    <div>
-        Titulo: 
-        <input [(ngModel)]="livro.titulo" placeholder="Titulo">
-    </div>
-    <div>
-        SubTitulo: 
-        <input [(ngModel)]="livro.subTitulo" placeholder="SubTitulo">
-    </div>
-    <div>
-        Resumo: 
-        <input [(ngModel)]="livro.resumo" placeholder="Resumo">
-    </div>
-    <div>
-        Quantidade de Paginas: 
-        <input [(ngModel)]="livro.qtdPaginas" placeholder="Paginas">
-    </div>
-    <div>
-        Data da Publicação 
-        <input [(ngModel)]="livro.dataPublicacao" type="date">
-    </div>
-    <div>
-        Editora: 
-        <input [(ngModel)]="livro.editora" placeholder="Editora">
-    </div>
-    <div>
-        Edição: 
-        <input [(ngModel)]="livro.edicao" placeholder="Edição">
-    </div>
+<div *ngIf="livro">
+    <form [formGroup]="livroForm" (ngSubmit)="atualizarLivro()">
+        <h2>{{livro.titulo}}</h2>
+        <div>
+            <label for="titulo">Titulo: </label> 
+            <input [(ngModel)]="livro.titulo" placeholder="Titulo" formControlName="titulo">
+        </div>
+        <div>
+            <label for="subtitulo">SubTitulo: </label>
+            <input [(ngModel)]="livro.subTitulo" placeholder="SubTitulo" formControlName="subTitulo">
+        </div>
+        <div>
+            <label for="resumo">Resumo: </label>
+            <input [(ngModel)]="livro.resumo" placeholder="Resumo" formControlName="resumo">
+        </div>
+        <div>
+            <label for="qtdPaginas">Quantidade de paginas: </label>
+            <input [(ngModel)]="livro.qtdPaginas" placeholder="Paginas" formControlName="qtdPaginas">
+        </div>
+        <div>
+            <label for="data">Data da Publicação: </label>
+            <input [(ngModel)]="livro.dataPublicacao" type="date" formControlName="dataPublicacao">
+        </div>
+        <div>
+            <label for="editora">Editora: </label>
+            <input [(ngModel)]="livro.editora" placeholder="Editora" formControlName="editora">
+        </div>
+        <div>
+            <label for="edicao">Edição: </label>
+            <input [(ngModel)]="livro.edicao" placeholder="Edição" formControlName="edicao">
+        </div>
+        <button type="submit" *ngIf="livro.id">Salvar</button>
+    </form>
     <div *ngFor="let autor of livro.autores">
         <h4>Autor: {{autor.nome }}</h4>
         <button (click)="deletarAutor(autor, livro)">Deletar Autor</button>
+        <button (click)="novoAutor()">Novo Autor</button>
     </div>
-    <button (click)="novoAutor()">Novo Autor</button>
-    <button (click)="atualizarLivro(livro)" *ngIf="livro.id">Salvar</button>
-    <app-novo-autor (newAutorEvent)="criarNovoAutor($event, livro)" [autor]="autorParaCriar"></app-novo-autor>
+    <form *ngIf="refalso" [formGroup]="autorForm" (ngSubmit)="criarNovoAutor()">
+        <input formControlName="nome" placeholder="Autor">
+        <button type="submit">Criar Autor</button>
+    </form>
 </div>

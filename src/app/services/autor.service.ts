@@ -25,4 +25,8 @@ export class AutorService {
   public deleteAutor(autor: Autor) : Observable<Autor[]>{
     return this.http.delete<Autor[]>(`${environment.apiUrl}/${this.url}/${autor.id}`);
   }
+
+  public createAutorLivro(criarAutorDto : CriarAutorDto) : Observable<Autor>{
+    return this.http.post<Autor>(`${environment.apiUrl}/${this.url}`, criarAutorDto);
+  }
 }

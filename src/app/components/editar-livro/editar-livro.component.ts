@@ -1,13 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AtualizarLivroDto } from 'src/app/models/AtualizarLivroDto';
-import { AtualizarAutorDto } from 'src/app/models/AtulizarAutorDto';
 import { Autor } from 'src/app/models/Autor';
-import { AutorDto } from 'src/app/models/AutorDto';
 import { AutorLivroDto } from 'src/app/models/AutorLivroDto';
-import { CriarAutorDto } from 'src/app/models/CriarAutorDto';
 import { Livro } from 'src/app/models/Livro';
 import { AutorService } from 'src/app/services/autor.service';
 import { LivroService } from 'src/app/services/livro.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-livro',
@@ -21,28 +18,39 @@ export class EditarLivroComponent implements OnInit {
   @Output() autorOut = new EventEmitter<Autor>();
   @Output() autorOut2 = new EventEmitter<Autor[]>();
 
-  autorParaCriar?: AutorDto;
+  refalso: boolean = false;
+  livroForm: FormGroup;
+  autorForm: FormGroup;
 
-  constructor(private livroService: LivroService, private autorService: AutorService) { }
+  constructor(private livroService: LivroService, private autorService: AutorService, private fb: FormBuilder) {
+    this.livroForm = this.fb.group({
+      titulo: ['', [Validators.required]],
+      subTitulo: [''],
+      resumo: [''],
+      qtdPaginas: [Number, [Validators.required]],
+      dataPublicacao: [Date, [Validators.required]],
+      editora: ['', [Validators.required]],
+      edicao: [Number]
+    })
+
+    this.autorForm = this.fb.group({
+      nome: ['', [Validators.required]]
+    })
+  }
 
   ngOnInit(): void {
   }
 
-  async atualizarLivro(livro: Livro){
-    let livroAtualizar = new AtualizarLivroDto;
-
-    livroAtualizar.id = livro.id;
-    livroAtualizar.titulo = livro.titulo;
-    livroAtualizar.subTitulo = livro.subTitulo;
-    livroAtualizar.resumo = livro.resumo;
-    livroAtualizar.qtdPaginas = livro.qtdPaginas;
-    livroAtualizar.dataPublicacao = livro.dataPublicacao;
-    livroAtualizar.editora = livro.editora;
-    livroAtualizar.edicao = livro.edicao;
-
-    (await this.livroService.updateLivro(livroAtualizar)).subscribe((livro: Livro) => this.livroOut.emit(livro));
-    
-    }
+  async atualizarLivro(){
+    const dados = {
+      id: this.livro!.id,
+      ...this.livroForm.value
+    };
+    if(this.livroForm.valid)
+      (await this.livroService.updateLivro(dados)).subscribe((livro: Livro) => this.livroOut.emit(livro));
+    else 
+      alert("Preasdasd")
+  }
   
 
   deletarAutor(autor: Autor, livro : Livro){
@@ -52,11 +60,18 @@ export class EditarLivroComponent implements OnInit {
     this.livroService.apagarAutorLivro(desacociar).subscribe((livro : Livro) => this.livroOut.emit(livro));
   }
 
-  async criarNovoAutor(autor: Autor, livro: Livro){
-    (await this.livroService.createAutorLivro(livro.id.toString() , autor.id.toString())).subscribe();
+  async criarNovoAutor(){
+    const dados = { 
+      idLivro: this.livro!.id.toString(),
+      ...this.autorForm.value
+    }
+    if(this.autorForm.valid)
+      this.autorService.createAutorLivro(dados).subscribe();
+    else
+      alert("assad")
   }
   
   novoAutor() {
-    this.autorParaCriar = new AutorDto;
+    this.refalso = true;
   }
 }
