@@ -1,0 +1,45 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Autor } from 'src/app/models/Autor';
+import { Livro } from 'src/app/models/Livro';
+import { LivroDto } from 'src/app/models/LivroDto';
+import { LivroService } from 'src/app/services/livro.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+
+@Component({
+  selector: 'app-cria-livro',
+  templateUrl: './cria-livro.component.html',
+  styleUrls: ['./cria-livro.component.scss']
+})
+
+export class CriaLivroComponent implements OnInit {
+  @Input() livro?: LivroDto;
+  @Output() updateTabela = new EventEmitter<Livro>();
+  livroCriado!: Livro;
+  autorCriado!: Autor;
+  livroForm : FormGroup;
+  alertP: boolean = false;
+
+  constructor(private livroService:LivroService, private fb: FormBuilder) { 
+    this.livroForm = this.fb.group({
+      titulo: ['', [Validators.required]],
+      subTitulo: [''],
+      resumo: [''],
+      qtdPaginas: [Number, [Validators.required]],
+      dataPublicacao: [Date, [Validators.required]],
+      editora: ['', [Validators.required]],
+      edicao: [Number],
+      autorNome: ['', [Validators.required]]
+    })
+  }
+
+  ngOnInit(): void {}
+
+  async criarAutorLivro(){
+    if(this.livroForm.valid)
+      (await this.livroService.createLivro(this.livroForm.value)).subscribe((result: Livro) => (this.livroCriado = result));
+    else
+      this.alertP = true;
+  }
+
+}

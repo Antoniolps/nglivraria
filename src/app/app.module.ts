@@ -1,18 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TabelaComponent } from "./components/tabela/tabela.component";
+import { EditarLivroComponent } from './components/editar-livro/editar-livro.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CriaLivroComponent } from './components/cria-livro/cria-livro.component';
+import { NovoAutorComponent } from './components/novo-autor/novo-autor.component';
+
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        TabelaComponent,
+        EditarLivroComponent,
+        CriaLivroComponent,
+        NovoAutorComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule
+    ]
 })
 export class AppModule { }

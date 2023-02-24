@@ -1,0 +1,38 @@
+<div *ngIf="livro && livro.autores">
+    <h2>{{livro.titulo}}</h2>
+    <div>
+        Titulo: 
+        <input [(ngModel)]="livro.titulo" placeholder="Titulo">
+    </div>
+    <div>
+        SubTitulo: 
+        <input [(ngModel)]="livro.subTitulo" placeholder="SubTitulo">
+    </div>
+    <div>
+        Resumo: 
+        <input [(ngModel)]="livro.resumo" placeholder="Resumo">
+    </div>
+    <div>
+        Quantidade de Paginas: 
+        <input [(ngModel)]="livro.qtdPaginas" placeholder="Paginas">
+    </div>
+    <div>
+        Data da Publicação 
+        <input [(ngModel)]="livro.dataPublicacao" type="date">
+    </div>
+    <div>
+        Editora: 
+        <input [(ngModel)]="livro.editora" placeholder="Editora">
+    </div>
+    <div>
+        Edição: 
+        <input [(ngModel)]="livro.edicao" placeholder="Edição">
+    </div>
+    <div *ngFor="let autor of livro.autores">
+        <h4>Autor: {{autor.nome }}</h4>
+        <button (click)="deletarAutor(autor, livro)">Deletar Autor</button>
+    </div>
+    <button (click)="novoAutor()">Novo Autor</button>
+    <button (click)="atualizarLivro(livro)" *ngIf="livro.id">Salvar</button>
+    <app-novo-autor (newAutorEvent)="criarNovoAutor($event, livro)" [autor]="autorParaCriar"></app-novo-autor>
+</div>

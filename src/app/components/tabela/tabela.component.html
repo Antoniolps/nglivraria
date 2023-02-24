@@ -1,0 +1,32 @@
+<button (click)="criarLivro()">Criar Novo Livro</button>
+<table>
+    <thead>
+        <th>Titulo</th>
+        <th>Subtitulo</th>
+        <th>Resumo</th>
+        <th>Quantidade de Paginas</th>
+        <th>Data da Publicação</th>
+        <th>Editora</th>
+        <th>Edição</th>
+        <th>Autor</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let livro of livros">
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.subTitulo }}</td>
+            <td>{{ livro.resumo }}</td>
+            <td>{{ livro.qtdPaginas }}</td>
+            <td>{{ livro.dataPublicacao | date : 'dd/MM/yyyy' }}</td>
+            <td>{{ livro.editora }}</td>
+            <td *ngIf="livro.edicao != 0">{{ livro.edicao }}</td>
+            <td *ngFor="let autor of livro.autores"><ul>{{ autor.nome }}</ul></td>
+            <td><button (click)="editarLivro(livro)">Editar Livro</button>
+                <button (click)="deletarLivro(livro)">Deletar Livro</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<app-editar-livro [livro]="livroParaEditar"></app-editar-livro>
+<app-cria-livro [livro]="livroParaCriar"></app-cria-livro>
