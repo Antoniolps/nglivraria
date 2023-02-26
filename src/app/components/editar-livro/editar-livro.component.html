@@ -34,10 +34,21 @@
     <div *ngFor="let autor of livro.autores">
         <h4>Autor: {{autor.nome }}</h4>
         <button (click)="deletarAutor(autor, livro)">Deletar Autor</button>
-        <button (click)="novoAutor()">Novo Autor</button>
+        <button (click)="editarAutor(autor)">Editar Autor</button>
     </div>
-    <form *ngIf="refalso" [formGroup]="autorForm" (ngSubmit)="criarNovoAutor()">
-        <input formControlName="nome" placeholder="Autor">
-        <button type="submit">Criar Autor</button>
-    </form>
+    <button (click)="novoAutor()">Novo Autor</button>
+    <div *ngIf="autor">
+        <form *ngIf="editarFalso" [formGroup]="editarAutorForm" (ngSubmit)="atualizarAutor()">
+            <label for="nomeAutor">Nome: </label>
+            <input id="nomeAutor" type="text" formControlName="nome" [(ngModel)]="autor.nome">
+            <button type="submit">Editar Autor</button>
+        </form>
+    </div>
+    <div>
+        <form *ngIf="refalso" [formGroup]="autorForm" (ngSubmit)="criarNovoAutor()">
+            <input formControlName="nome" placeholder="Autor">
+            <button type="submit">Criar Autor</button>
+        </form>
+    </div>
+    
 </div>

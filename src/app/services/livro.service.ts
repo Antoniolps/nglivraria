@@ -24,8 +24,8 @@ export class LivroService {
     return this.http.put<Livro>(`${environment.apiUrl}/${this.url}`, livro);
   }
 
-  public async createLivro(livro: CriarLivroDto) : Promise<Observable<Livro>>{
-    return this.http.post<Livro>(`${environment.apiUrl}/${this.url}`, livro);
+  public createLivro(livro: CriarLivroDto) : Observable<Livro[]>{
+    return this.http.post<Livro[]>(`${environment.apiUrl}/${this.url}`, livro);
   }
 
   public deleteLivro(livro: Livro) : Observable<Livro[]>{

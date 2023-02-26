@@ -19,8 +19,10 @@ export class EditarLivroComponent implements OnInit {
   @Output() autorOut2 = new EventEmitter<Autor[]>();
 
   refalso: boolean = false;
+  editarFalso: boolean = false;
   livroForm: FormGroup;
   autorForm: FormGroup;
+  editarAutorForm: FormGroup;
 
   constructor(private livroService: LivroService, private autorService: AutorService, private fb: FormBuilder) {
     this.livroForm = this.fb.group({
@@ -36,6 +38,10 @@ export class EditarLivroComponent implements OnInit {
     this.autorForm = this.fb.group({
       nome: ['', [Validators.required]]
     })
+
+    this.editarAutorForm = this.fb.group({
+      nome: ['', [Validators.required]]
+    })
   }
 
   ngOnInit(): void {
@@ -49,7 +55,7 @@ export class EditarLivroComponent implements OnInit {
     if(this.livroForm.valid)
       (await this.livroService.updateLivro(dados)).subscribe((livro: Livro) => this.livroOut.emit(livro));
     else 
-      alert("Preasdasd")
+      alert("Verifique os campos obrigatórios!")
   }
   
 
@@ -68,7 +74,25 @@ export class EditarLivroComponent implements OnInit {
     if(this.autorForm.valid)
       this.autorService.createAutorLivro(dados).subscribe();
     else
-      alert("assad")
+      alert("Verifique os campos obrigatórios!")
+  }
+
+  async atualizarAutor(){
+    const dados = { 
+      id: this.autor!.id.toString(),
+      ...this.editarAutorForm.value
+    }
+
+    if(this.editarAutorForm.valid)
+      (await this.autorService.updateAutor(dados)).subscribe((autor: Autor) => this.autorOut.emit(autor));
+    else
+      alert("Verifique os campos obrigatórios!")
+    
+  }
+
+  editarAutor(autor: Autor){
+    this.editarFalso = true;
+    this.autor = autor;
   }
   
   novoAutor() {

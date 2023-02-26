@@ -14,9 +14,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class CriaLivroComponent implements OnInit {
   @Input() livro?: LivroDto;
-  @Output() updateTabela = new EventEmitter<Livro>();
-  livroCriado!: Livro;
-  autorCriado!: Autor;
+  @Output() updateTabela = new EventEmitter<Livro[]>();
   livroForm : FormGroup;
   alertP: boolean = false;
 
@@ -37,7 +35,7 @@ export class CriaLivroComponent implements OnInit {
 
   async criarAutorLivro(){
     if(this.livroForm.valid)
-      (await this.livroService.createLivro(this.livroForm.value)).subscribe((result: Livro) => (this.livroCriado = result));
+      this.livroService.createLivro(this.livroForm.value).subscribe((result: Livro[]) => this.updateTabela.emit(result));
     else
       this.alertP = true;
   }

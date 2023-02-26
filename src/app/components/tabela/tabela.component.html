@@ -1,3 +1,17 @@
+<form [formGroup]="buscarLivro" (ngSubmit)="pesquisarLivro()">
+    <div>
+        <label for="titulo">Pesquisar:</label>
+        <input id="titulo" type="text" formControlName="titulo">
+        <button type="submit">Pesquisar</button>
+    </div>    
+</form>
+<div>
+    <input type="checkbox" [(ngModel)]="checkbox1" (change)="desmarcarCheckBox2()">
+    <label for="checkbox1">Livro</label>
+    <input type="checkbox" [(ngModel)]="checkbox2" (change)="desmarcarCheckBox1()">
+    <label for="checkbox2">Autor</label>
+</div>
+
 <button (click)="criarLivro()">Criar Novo Livro</button>
 <table>
     <thead>
@@ -29,4 +43,4 @@
 </table>
 
 <app-editar-livro [livro]="livroParaEditar"></app-editar-livro>
-<app-cria-livro [livro]="livroParaCriar"></app-cria-livro>
+<app-cria-livro (updateTabela)="novoCriado($event)" [livro]="livroParaCriar"></app-cria-livro>

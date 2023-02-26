@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ElementRef, Renderer2} from '@angular/core';
 import { Livro } from 'src/app/models/Livro';
 import { LivroDto } from 'src/app/models/LivroDto';
 import { LivroService } from 'src/app/services/livro.service';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tabela',
@@ -10,13 +10,25 @@ import { LivroService } from 'src/app/services/livro.service';
   styleUrls: ['./tabela.component.scss']
 })
 export class TabelaComponent implements OnInit {
-  @Output() updateTabela = new EventEmitter<Livro[]>();
-
+ 
   livros: Livro[] = [];
   livroParaEditar?: Livro;
   livroParaCriar?: LivroDto;
+  checkbox1 = false;
+  checkbox2 = false;
 
-  constructor(private livroService: LivroService){}
+  @Output() updateTabela = new EventEmitter<Livro[]>(); 
+
+  buscarLivro: FormGroup;
+  
+
+  constructor(private livroService: LivroService, private fb: FormBuilder, private renderer: Renderer2){
+    this.buscarLivro = this.fb.group({
+      titulo: ['', [Validators.required]]
+    })
+
+  
+  }
 
   ngOnInit(){
     this.livroService.getLivros().subscribe((result : Livro[]) => (this.livros = result));
@@ -31,6 +43,28 @@ export class TabelaComponent implements OnInit {
   }
 
   deletarLivro(livro: Livro){
-    this.livroService.deleteLivro(livro).subscribe((livros: Livro[]) => this.updateTabela.emit(livros));
+    this.livroService.deleteLivro(livro).subscribe((livros: Livro[]) => this.updateTabela.emit(this.livros = livros));
   }
+
+  pesquisarLivro(){
+
+  }
+
+  desmarcarCheckBox2() {
+    if (this.checkbox1) {
+      this.checkbox2 = false;
+    }
+  }
+
+  desmarcarCheckBox1() {
+    if (this.checkbox2) {
+      this.checkbox1 = false;
+    }
+  }
+
+  novoCriado(event: Livro[]){
+    this.updateTabela.emit(this.livros = event);
+  }
+  
+  
 }

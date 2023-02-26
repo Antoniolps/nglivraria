@@ -9,7 +9,9 @@ import { TabelaComponent } from "./components/tabela/tabela.component";
 import { EditarLivroComponent } from './components/editar-livro/editar-livro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CriaLivroComponent } from './components/cria-livro/cria-livro.component';
-import { NovoAutorComponent } from './components/novo-autor/novo-autor.component';
+import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { NovoAutorComponent } from './components/novo-autor/novo-autor.component
         TabelaComponent,
         EditarLivroComponent,
         CriaLivroComponent,
-        NovoAutorComponent
+        HomeComponent,
+        HeaderComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

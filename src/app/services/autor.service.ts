@@ -18,7 +18,7 @@ export class AutorService {
     return this.http.post<Autor>(`${environment.apiUrl}/${this.url}`, autor);
   }
 
-  public async updateAutor(autor: AtualizarAutorDto):Promise<Observable<Autor>>{
+  public async updateAutor(autor: Autor):Promise<Observable<Autor>>{
     return this.http.put<Autor>(`${environment.apiUrl}/${this.url}`, autor);
   }
 
