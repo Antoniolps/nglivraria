@@ -1,0 +1,167 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    max-width: 80%;
+    margin-right:auto;
+	margin-left:auto;
+	justify-content:center;
+	align-items:center;
+    margin-bottom: 100px;
+
+    table{
+        width:100%;
+        border:1px solid #EEEEEE;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .tcontent{
+        display: block;
+    }
+    
+    .theader{
+        display:flex;
+        justify-content: center;
+        width:100%;
+        background-color: var(--primary);
+        padding:(12px * 1.5) 0;
+        gap: 30px;
+    }
+    
+    .t-row{
+        display:flex;
+        width:100%;
+        padding:(12px * 1.5) 0;
+        background-color: #EEEEEE;
+    }
+    
+    .theader-item{
+        flex: 1 1 20%;
+        text-align: center;
+    }
+
+    .t-data{
+        text-align: center;
+        width: 10%;
+        min-width: 94px;
+
+        ul li{
+            list-style: none;
+        }
+    }
+    
+    .theader-item{
+        text-transform: uppercase;
+        color: white;
+    }
+    
+    .icon{
+        width: 20px;
+    }
+    .botaoEditar{
+        margin: 0px 5px 0px 5px;
+        padding: 5px 5px 5px 5px;
+        background-color:rgb(13, 190, 72);
+        border: 3px solid  rgb(11, 153, 59);
+        color: white;
+        border-radius: 8px;
+        width: 50px;
+        font-size: 20px;
+    }
+    .botaoEditar:hover{
+        cursor: pointer;
+        background-color: rgb(11, 153, 59);
+        transition: all ease-in-out .3s;
+    }
+
+    .botaoDeletar{
+        margin: 0px 5px 0px 5px;
+        padding: 5px 5px 5px 5px;
+        background-color:rgb(224, 12, 12);
+        border: 3px solid  rgb(165, 13, 13);
+        color: white;
+        border-radius: 8px;
+        width: 50px;
+        font-size: 20px;
+    }
+
+    .botaoDeletar:hover{
+        cursor: pointer;
+        background-color: rgb(165, 13, 13);
+        transition: all ease-in-out .3s;
+    }
+}
+
+.botHeader{
+    display: flex;
+    justify-content: space-between;
+    min-width: 100%;
+    
+    .btncriar{
+        padding-top: 10px;
+        padding-left: 20px;
+        button{
+            margin: 0px 5px 0px 5px;
+            padding: 5px 5px 5px 5px;
+            background-color:rgb(13, 190, 72);
+            border: 3px solid  rgb(11, 153, 59);
+            color: white;
+            border-radius: 8px;
+        }  
+        button:hover{
+            cursor: pointer;
+            background-color: rgb(11, 153, 59);
+            transition: all ease-in-out .3s;
+        }  
+    }
+    
+
+    .navbar{
+        display: flex;
+        padding-right: 20px;
+
+        .pesquisa{
+            padding: 10px 20px 10px 0px;
+
+            label{
+                padding-right: 5px;
+            }
+            
+            button{
+                margin: 0px 5px 0px 5px;
+                padding: 5px 5px 5px 5px;
+                background-color: var(--btn-primary);
+                border: 3px solid rgb(230, 113, 4);
+                color: white;
+                border-radius: 8px;
+            }
+
+            button:hover{
+                cursor: pointer;
+                background-color: rgb(230, 113, 4);
+                transition: all ease-in-out .3s;
+            }
+
+            input{
+                padding: 5px 5px 5px 5px;
+                border-radius: 5px;
+                border: none;
+            }
+        }
+
+        .checkboxes{
+            padding-top: 20px;
+            text-align: center;
+
+            label{
+                padding: 0px 5px 0px 5px;
+            }
+            input{
+                padding: 0px 5px 0px 5px;
+            }
+        }
+    } 
+}
+
+

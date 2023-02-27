@@ -1,0 +1,158 @@
+.container {
+    padding: 15px 30px;
+
+    .icon{
+        width: 20px;
+    }
+
+    .botaoAdd{
+        margin: 0px 5px 0px 5px;
+        padding: 5px 5px 5px 5px;
+        background-color:rgb(13, 190, 72);
+        border: 3px solid  rgb(11, 153, 59);
+        color: white;
+        border-radius: 8px;
+        width: 50px;
+        font-size: 20px; 
+    }
+
+    .botaoAdd:hover{
+        cursor: pointer;
+        background-color: rgb(11, 153, 59);
+        transition: all ease-in-out .3s;
+    }
+
+
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 700px;
+
+        h1 {
+            margin-bottom: 15px;
+          }
+        
+          .campo {
+            margin-bottom: 15px;
+        
+            label, input {
+              display: block;
+            }
+        
+            label {
+              font-size: 15px;
+              text-transform: uppercase;
+              margin-bottom: 10px;
+            }
+        
+            input {
+              width: 700px;
+              font-size: 20px;
+            }
+        
+          }
+      
+          .acoes{
+              align-self: flex-end;
+      
+              button{
+                  margin: 0px 5px 0px 5px;
+                  padding: 5px 5px 5px 5px;
+                  background-color:rgb(13, 190, 72);
+                  border: 3px solid  rgb(11, 153, 59);
+                  color: white;
+                  border-radius: 8px;
+                  width: 100px;
+                  font-size: 20px;
+              }  
+              button:hover{
+                  cursor: pointer;
+                  background-color: rgb(11, 153, 59);
+                  transition: all ease-in-out .3s;
+              }
+          }
+    }
+
+    .listarAutores{
+        display: flex;
+
+        .botaoEditar{
+            margin: 0px 5px 0px 5px;
+            padding: 5px 5px 5px 5px;
+            background-color:rgb(13, 190, 72);
+            border: 3px solid  rgb(11, 153, 59);
+            color: white;
+            border-radius: 8px;
+            width: 50px;
+            font-size: 20px;
+        }
+        .botaoEditar:hover{
+            cursor: pointer;
+            background-color: rgb(11, 153, 59);
+            transition: all ease-in-out .3s;
+        }
+
+        .botaoDeletar{
+            margin: 0px 5px 0px 5px;
+            padding: 5px 5px 5px 5px;
+            background-color:rgb(224, 12, 12);
+            border: 3px solid  rgb(165, 13, 13);
+            color: white;
+            border-radius: 8px;
+            width: 50px;
+            font-size: 20px;
+        }
+
+        .botaoDeletar:hover{
+            cursor: pointer;
+            background-color: rgb(165, 13, 13);
+            transition: all ease-in-out .3s;
+        }
+
+    }
+
+    .campo{
+        display: flex;
+        flex-direction: column;
+        width: 700px;
+        
+        .novoAutor {
+            margin-bottom: 15px;
+        
+            label, input {
+              display: block;
+            }
+        
+            label {
+                margin-top: 10px;
+                font-size: 15px;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
+        
+            .inputAutor {
+              width: 700px;
+              font-size: 20px;
+            }
+        
+        }
+      
+        .envia{
+            align-self: flex-end;
+            margin: 5px 5px 0px 5px;
+            padding: 5px 5px 5px 5px;
+            background-color:rgb(13, 190, 72);
+            border: 3px solid  rgb(11, 153, 59);
+            color: white;
+            border-radius: 8px;
+            width: 150px;
+            font-size: 20px;
+            
+        }
+        .envia:hover{
+            cursor: pointer;
+            background-color: rgb(11, 153, 59);
+            transition: all ease-in-out .3s;
+        }
+    }
+}    

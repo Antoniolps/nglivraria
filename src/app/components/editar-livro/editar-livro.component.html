@@ -1,54 +1,57 @@
-<div *ngIf="livro">
+<div class="container" *ngIf="livro">
     <form [formGroup]="livroForm" (ngSubmit)="atualizarLivro()">
         <h2>{{livro.titulo}}</h2>
-        <div>
+        <div class="campo">
             <label for="titulo">Titulo: </label> 
             <input [(ngModel)]="livro.titulo" placeholder="Titulo" formControlName="titulo">
         </div>
-        <div>
+        <div class="campo">
             <label for="subtitulo">SubTitulo: </label>
             <input [(ngModel)]="livro.subTitulo" placeholder="SubTitulo" formControlName="subTitulo">
         </div>
-        <div>
+        <div class="campo">
             <label for="resumo">Resumo: </label>
             <input [(ngModel)]="livro.resumo" placeholder="Resumo" formControlName="resumo">
         </div>
-        <div>
+        <div class="campo">
             <label for="qtdPaginas">Quantidade de paginas: </label>
             <input [(ngModel)]="livro.qtdPaginas" placeholder="Paginas" formControlName="qtdPaginas">
         </div>
-        <div>
+        <div class="campo">
             <label for="data">Data da Publicação: </label>
             <input [(ngModel)]="livro.dataPublicacao" type="date" formControlName="dataPublicacao">
         </div>
-        <div>
+        <div class="campo">
             <label for="editora">Editora: </label>
             <input [(ngModel)]="livro.editora" placeholder="Editora" formControlName="editora">
         </div>
-        <div>
+        <div class="campo">
             <label for="edicao">Edição: </label>
             <input [(ngModel)]="livro.edicao" placeholder="Edição" formControlName="edicao">
         </div>
-        <button type="submit" *ngIf="livro.id">Salvar</button>
+        <div class="acoes">
+            <button type="submit" *ngIf="livro.id">Salvar</button>
+        </div>
     </form>
-    <div *ngFor="let autor of livro.autores">
-        <h4>Autor: {{autor.nome }}</h4>
-        <button (click)="deletarAutor(autor, livro)">Deletar Autor</button>
-        <button (click)="editarAutor(autor)">Editar Autor</button>
+    <div class="listarAutores" *ngFor="let autor of livro.autores">
+        <h3>Autor: {{autor.nome }}</h3>
+        <button class="botaoEditar" (click)="editarAutor(autor)"><img class="icon" src="../../../assets/pen.png"></button>
+        <button class="botaoDeletar" (click)="deletarAutor(autor, livro)"><img class="icon" src="../../../assets/delete.png"></button>
     </div>
-    <button (click)="novoAutor()">Novo Autor</button>
-    <div *ngIf="autor">
-        <form *ngIf="editarFalso" [formGroup]="editarAutorForm" (ngSubmit)="atualizarAutor()">
+    <div class="campo" *ngIf="autor">
+        <form class="novoAutor" *ngIf="editarFalso" [formGroup]="editarAutorForm" (ngSubmit)="atualizarAutor()">
             <label for="nomeAutor">Nome: </label>
-            <input id="nomeAutor" type="text" formControlName="nome" [(ngModel)]="autor.nome">
-            <button type="submit">Editar Autor</button>
+            <input class="inputAutor" id="nomeAutor" type="text" formControlName="nome" [(ngModel)]="autor.nome">
+            <button class="envia" type="submit">Editar Autor</button>
         </form>
     </div>
-    <div>
-        <form *ngIf="refalso" [formGroup]="autorForm" (ngSubmit)="criarNovoAutor()">
-            <input formControlName="nome" placeholder="Autor">
-            <button type="submit">Criar Autor</button>
+    <div class="campo">
+        <form class="novoAutor" *ngIf="refalso" [formGroup]="autorForm" (ngSubmit)="criarNovoAutor()">
+            <label for="nomeAutor">Nome do Autor</label>
+            <input class="inputAutor" id="nomeAutor" formControlName="nome" placeholder="Autor">
+            <button class="envia" type="submit">Criar Autor</button>
         </form>
     </div>
+    <button class="botaoAdd" *ngIf="refalso" (click)="novoAutor()"><img src="../../../assets/plus.png" class="icon"></button>
     
 </div>

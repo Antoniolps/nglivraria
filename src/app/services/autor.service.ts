@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { AtualizarAutorDto } from '../models/AtulizarAutorDto';
+import { Livro } from '../models/Livro';
 import { Autor } from '../models/Autor';
 import { CriarAutorDto } from '../models/CriarAutorDto';
 
@@ -14,19 +14,19 @@ export class AutorService {
 
   constructor(private http: HttpClient) { }
 
-  public async createAutor(autor: CriarAutorDto):Promise<Observable<Autor>>{
-    return this.http.post<Autor>(`${environment.apiUrl}/${this.url}`, autor);
+  public createAutor(autor: CriarAutorDto): Observable<Livro[]>{
+    return this.http.post<Livro[]>(`${environment.apiUrl}/${this.url}`, autor);
   }
 
-  public async updateAutor(autor: Autor):Promise<Observable<Autor>>{
-    return this.http.put<Autor>(`${environment.apiUrl}/${this.url}`, autor);
+  public updateAutor(autor: Autor): Observable<Livro[]>{
+    return this.http.put<Livro[]>(`${environment.apiUrl}/${this.url}`, autor);
   }
 
-  public deleteAutor(autor: Autor) : Observable<Autor[]>{
-    return this.http.delete<Autor[]>(`${environment.apiUrl}/${this.url}/${autor.id}`);
+  public deleteAutor(autor: Autor) : Observable<Livro[]>{
+    return this.http.delete<Livro[]>(`${environment.apiUrl}/${this.url}/${autor.id}`);
   }
 
-  public createAutorLivro(criarAutorDto : CriarAutorDto) : Observable<Autor>{
-    return this.http.post<Autor>(`${environment.apiUrl}/${this.url}`, criarAutorDto);
+  public createAutorLivro(criarAutorDto : CriarAutorDto) : Observable<Livro[]>{
+    return this.http.post<Livro[]>(`${environment.apiUrl}/${this.url}`, criarAutorDto);
   }
 }

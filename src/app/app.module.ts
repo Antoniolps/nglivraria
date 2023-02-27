@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CriaLivroComponent } from './components/cria-livro/cria-livro.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 
@@ -21,7 +22,8 @@ import { HeaderComponent } from './components/header/header.component';
         EditarLivroComponent,
         CriaLivroComponent,
         HomeComponent,
-        HeaderComponent
+        HeaderComponent,
+        DialogComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -1,41 +1,46 @@
-<form [formGroup]="livroForm" *ngIf="livro" (ngSubmit)="criarAutorLivro()">
-    <h2>{{livro.titulo}}</h2>
-    <div>
-        <label for="titulo">Titulo:</label> 
-        <input id="titulo" [(ngModel)]="livro.titulo" placeholder="Titulo" formControlName="titulo">
-        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
-    </div>
-    <div>
-        SubTitulo: 
-        <input id="subtitulo" [(ngModel)]="livro.subTitulo" placeholder="SubTitulo" formControlName="subTitulo">
-    </div>
-    <div>
-        Resumo: 
-        <input id="resumo" [(ngModel)]="livro.resumo" placeholder="Resumo" formControlName="resumo">
-    </div>
-    <div>
-        Quantidade de Paginas: 
-        <input id="qtdPaginas" [(ngModel)]="livro.qtdPaginas" placeholder="Paginas" formControlName="qtdPaginas">
-        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
-    </div>
-    <div>
-        Data da Publicação 
-        <input id="dataPublicacao" [(ngModel)]="livro.dataPublicacao" type="date" formControlName="dataPublicacao">
-        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
-    </div>
-    <div>
-        Editora: 
-        <input id="editora" [(ngModel)]="livro.editora" placeholder="Editora" formControlName="editora">
-        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
-    </div>
-    <div>
-        Edição: 
-        <input id="edicao" [(ngModel)]="livro.edicao" placeholder="Edição" formControlName="edicao" value=0>
-    </div>
-    <div>
-        Autor: 
-        <input id="autorNome" [(ngModel)]="livro.nomeAutor" placeholder="Nome do autor" formControlName="autorNome">
-        <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
-    </div>
-    <button type="submit">Criar</button>
-</form>
+<div class="container">
+    <form [formGroup]="livroForm" *ngIf="livro" (ngSubmit)="criarAutorLivro()">
+        <h2>{{livro.titulo}}</h2>
+        <div class="campo">
+            <label for="titulo">*Titulo:</label> 
+            <input id="titulo" [(ngModel)]="livro.titulo" placeholder="Titulo" formControlName="titulo">
+            <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+        </div>
+        <div class="campo">
+            <label for="subtitulo">SubTitulo</label>
+            <input id="subtitulo" [(ngModel)]="livro.subTitulo" placeholder="SubTitulo" formControlName="subTitulo">
+        </div>
+        <div class="campo">
+            <label for="resumo">Resumo:</label>
+            <input id="resumo" [(ngModel)]="livro.resumo" placeholder="Resumo" formControlName="resumo">
+        </div>
+        <div class="campo">
+            <label for="qtdPaginas">*Quantidade de Paginas:</label> 
+            <input id="qtdPaginas" [(ngModel)]="livro.qtdPaginas" placeholder="Paginas" formControlName="qtdPaginas">
+            <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+        </div>
+        <div class="campo">
+            <label for="dataPublicacao">*Data da Publicação</label>
+            <input id="dataPublicacao" [(ngModel)]="livro.dataPublicacao" type="date" formControlName="dataPublicacao">
+            <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+        </div>
+        <div class="campo">
+            <label for="editora">*Editora:</label>
+            <input id="editora" [(ngModel)]="livro.editora" placeholder="Editora" formControlName="editora">
+            <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+        </div>
+        <div class="campo">
+            <label for="edicao">Edição:</label>
+            <input id="edicao" [(ngModel)]="livro.edicao" placeholder="Edição" formControlName="edicao" value=0>
+        </div>
+        <div class="campo">
+            <label for="autorNome">*Nome do Autor:</label>
+            <input id="autorNome" [(ngModel)]="livro.nomeAutor" placeholder="Nome do autor" formControlName="autorNome">
+            <p class="alert" *ngIf="alertP">*Campo Obrigatório</p>
+        </div>
+        <div class="acoes">
+            <button type="submit">Criar</button>
+        </div>
+        
+    </form>
+</div>

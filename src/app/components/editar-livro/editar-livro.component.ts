@@ -14,9 +14,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class EditarLivroComponent implements OnInit {
   @Input() livro?: Livro;
   @Input() autor!: Autor;
-  @Output() livroOut = new EventEmitter<Livro>();
-  @Output() autorOut = new EventEmitter<Autor>();
-  @Output() autorOut2 = new EventEmitter<Autor[]>();
+  @Output() updateLivro = new EventEmitter<Livro>();
+  @Output() updateTabela = new EventEmitter<Livro[]>();
 
   refalso: boolean = false;
   editarFalso: boolean = false;
@@ -47,13 +46,18 @@ export class EditarLivroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async atualizarLivro(){
+  atualizarLivro(){
     const dados = {
       id: this.livro!.id,
       ...this.livroForm.value
     };
     if(this.livroForm.valid)
-      (await this.livroService.updateLivro(dados)).subscribe((livro: Livro) => this.livroOut.emit(livro));
+      this.livroService.updateLivro(dados).subscribe((livros: Livro[]) => {
+        this.updateTabela.emit(livros)
+        if(this.livro != null)
+          this.livroService.getLivroById(this.livro).subscribe((livro : Livro) => {this.updateLivro.emit(this.livro = livro)}
+          ,error => alert("Verifique os campos e tente novamente!"));
+      });
     else 
       alert("Verifique os campos obrigatórios!")
   }
@@ -63,28 +67,44 @@ export class EditarLivroComponent implements OnInit {
     let desacociar = new AutorLivroDto
     desacociar.idAutor = autor.id.toString();
     desacociar.idLivro = livro.id.toString();
-    this.livroService.apagarAutorLivro(desacociar).subscribe((livro : Livro) => this.livroOut.emit(livro));
+    this.livroService.apagarAutorLivro(desacociar).subscribe((livros : Livro[]) => {
+      this.updateTabela.emit(livros)
+      if(this.livro != null)
+        this.livroService.getLivroById(this.livro).subscribe((livro : Livro) => this.updateLivro.emit(this.livro = livro));
+    });
   }
 
-  async criarNovoAutor(){
+  criarNovoAutor(){
     const dados = { 
       idLivro: this.livro!.id.toString(),
       ...this.autorForm.value
     }
     if(this.autorForm.valid)
-      this.autorService.createAutorLivro(dados).subscribe();
+      this.autorService.createAutorLivro(dados).subscribe((livros : Livro[]) => {
+        this.updateTabela.emit(livros)
+        if(this.livro != null)
+          this.livroService.getLivroById(this.livro).subscribe((livro : Livro) => this.updateLivro.emit(this.livro = livro));
+      });
     else
       alert("Verifique os campos obrigatórios!")
+
+    this.refalso = false;
   }
 
-  async atualizarAutor(){
+  atualizarAutor(){
     const dados = { 
       id: this.autor!.id.toString(),
       ...this.editarAutorForm.value
     }
 
-    if(this.editarAutorForm.valid)
-      (await this.autorService.updateAutor(dados)).subscribe((autor: Autor) => this.autorOut.emit(autor));
+    if(this.editarAutorForm.valid){
+      this.autorService.updateAutor(dados).subscribe((livros: Livro[]) => {
+        this.updateTabela.emit(livros)
+        if(this.livro != null)
+          this.livroService.getLivroById(this.livro).subscribe((livro : Livro) => this.updateLivro.emit(this.livro = livro));
+      });
+      this.editarFalso = false;
+    }
     else
       alert("Verifique os campos obrigatórios!")
     
@@ -92,10 +112,12 @@ export class EditarLivroComponent implements OnInit {
 
   editarAutor(autor: Autor){
     this.editarFalso = true;
+    this.refalso = false;
     this.autor = autor;
   }
   
   novoAutor() {
     this.refalso = true;
+    this.editarFalso = false;
   }
 }
